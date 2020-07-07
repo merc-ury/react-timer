@@ -1,0 +1,7 @@
+@import url('https://css.gg/instagram.css');
+@import url('https://css.gg/twitter.css');
+@import url('https://css.gg/git-fork.css');
+
+.side {
+    display: inline-block;
+}

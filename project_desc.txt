@@ -1,0 +1,4 @@
+REQUIREMENTS:
+1. List all active timers on front page
+2. Navs with List, Create, About
+3. Timers have NAME, DESCRIPTION, and COUNTDOWN

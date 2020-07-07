@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FunctionComponent } from 'react';
+import { TimerProvider } from './data/TimerContext';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Navbar } from './navbar/Navbar';
+import { Listview } from './listview/Listview';
+import { CreateTimer } from './create/CreateTimer';
+import { About } from './about/About';
 
-function App() {
+export const App: FunctionComponent = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TimerProvider>
+      <div className="container">
+        <BrowserRouter>
+          <Navbar />
+          <Route exact path="/" component={ Listview } />
+          <Switch>
+            <Route path="/about" component={ About } />
+            <Route path="/create" component={ CreateTimer } />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    </TimerProvider>
   );
-}
-
-export default App;
+};
