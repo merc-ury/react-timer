@@ -1,27 +1,21 @@
 import React, { useState, createContext } from 'react';
-import { ITimer } from './timer';
+import { ITimer } from './Timer';
 
-export const TimerContext = createContext<ITimer[]>([]);
+//export const TimerContext = createContext<[ITimer[], (newVal: ITimer[]) => void]>([[], () => {}]);
+export const TimerContext = createContext<[ITimer[], React.Dispatch<React.SetStateAction<ITimer[]>>]>([[], () => {}]);
 
 export const TimerProvider: React.FunctionComponent = (props) => {
     const [timerList, setTimerList] = useState<ITimer[]>([
         {
-            title: 'Bacon',
-            interval: 5000
-        },
-        {
-            title: 'Eggs',
-            interval: 3000
-        },
-        {
-            title: 'Bread',
-            description: 'Just the right amount of toast',
-            interval: 4000
+            title: 'Initial Timer',
+            description: 'Your first timer!',
+            interval: 60,
+            isActive: false
         }
     ]);
     
     return (
-        <TimerContext.Provider value={ timerList }>
+        <TimerContext.Provider value={ [timerList, setTimerList] }>
             { props.children }
         </TimerContext.Provider>
     );
