@@ -1,19 +1,27 @@
-import React, { FunctionComponent, useContext } from 'react';
+import React, { FunctionComponent, useEffect, useContext } from 'react';
 import { TimerContext } from '../data/TimerContext';
 import { ITimer } from '../data/Timer';
 import './Listview.css';
 
 export const Listview: FunctionComponent = () => {
+    let x: string = 'btn btn-success';
     const timers = useContext(TimerContext)[0];
 
     const getStatus = (timer: ITimer): boolean => {
         return timer.isActive;
     };
 
-    const startTimer = (timer: ITimer): void => {
-        timer.isActive = true;
-        alert('Started!');
+    const changeButtonClass = (timer: ITimer): void => {
+        timer.isActive = !timer.isActive;
     };
+
+    const buttonClass = (active: boolean): string => {
+        return (active ? 'btn btn-danger' : 'btn btn-success');
+    };
+
+    useEffect(() => {
+        
+    }, [timers]);
 
     return (
         <div>
@@ -36,8 +44,8 @@ export const Listview: FunctionComponent = () => {
                                 <td>{ timer.description }</td>
                                 <td>{ timer.interval }</td>
                                 <td>
-                                    <button className={ getStatus(timer) ? "btn btn-danger" : "btn btn-success" }
-                                            onClick={ () => startTimer(timer) }>
+                                    <button className={ buttonClass(timer.isActive) }
+                                            onClick={ () => changeButtonClass(timer) }>
                                         { getStatus(timer) ? "Stop" : "Start" }
                                     </button>
                                 </td>
