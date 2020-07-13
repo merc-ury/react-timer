@@ -5,9 +5,9 @@ import './CreateTimer.css';
 
 export const CreateTimer: FunctionComponent = () => {
 
-    const [timerList, setTimerList] = useContext(TimerContext);
-    const [name, setName] = useState<string>("");
-    const [desc, setDesc] = useState<string>("");
+    const setTimerList = useContext(TimerContext)[1];
+    const [name, setName] = useState<string>('');
+    const [desc, setDesc] = useState<string>('');
     const [int, setInterval] = useState<number>(0);
 
     const updateName = (e: FormEvent<HTMLInputElement>): void => {

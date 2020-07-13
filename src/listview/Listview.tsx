@@ -12,6 +12,7 @@ export const Listview: FunctionComponent = () => {
 
     const startTimer = (timer: ITimer): void => {
         timer.isActive = true;
+        alert('Started!');
     };
 
     return (
