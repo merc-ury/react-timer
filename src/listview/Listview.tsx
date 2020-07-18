@@ -17,6 +17,10 @@ export const Listview: FunctionComponent = () => {
         setTimers([...timers]);
     };
 
+    const deleteTimer = (timer: ITimer) => {
+        setTimers(timers.filter(t => t !== timer));
+    };
+
     return (
         <div>
             <br />
@@ -41,6 +45,11 @@ export const Listview: FunctionComponent = () => {
                                     <button className={ timer.isActive ? 'btn btn-danger' : 'btn btn-success' }
                                             onClick={ () => updateStatus(timer) }>
                                         { timer.isActive ? 'Stop' : 'Start' }
+                                    </button>
+                                    &nbsp;
+                                    <button className="btn btn-primary"
+                                            onClick={ () => deleteTimer(timer) }>
+                                        Delete
                                     </button>
                                 </td>
                             </tr>
