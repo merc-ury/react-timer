@@ -32,7 +32,7 @@ export const CreateTimer: FunctionComponent = () => {
             isActive: false
         };
 
-        setTimerList(prev => [...prev, t]);
+        setTimerList(timers => [...timers, t]);
     };
     
     return (

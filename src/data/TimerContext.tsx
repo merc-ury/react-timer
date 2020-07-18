@@ -1,11 +1,10 @@
 import React, { useState, createContext } from 'react';
 import { ITimer } from './Timer';
 
-type TimerState = ITimer[];
-type TimerStateUpdate = React.SetStateAction<TimerState>;
+type TimerStateUpdate = React.SetStateAction<ITimer[]>;
 type TimerDispatch = React.Dispatch<TimerStateUpdate>;
 
-export const TimerContext = createContext<[TimerState, TimerDispatch]>([
+export const TimerContext = createContext<[ITimer[], TimerDispatch]>([
     [],
     () => {},
 ]);
