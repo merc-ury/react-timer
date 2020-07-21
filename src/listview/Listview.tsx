@@ -19,7 +19,7 @@ export const Listview: FunctionComponent = () => {
     };
 
     const deleteTimer = (timer: ITimer) => {
-        setTimers(timers.filter(t => t !== timer));
+        setTimers(timers.filter(t => t.id !== timer.id));
     };
 
     const clearTimers = () => {
