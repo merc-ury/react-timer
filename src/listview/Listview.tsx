@@ -1,14 +1,15 @@
 import React, { FunctionComponent, useContext } from 'react';
 import { TimerContext } from '../data/TimerContext';
-import { ITimer } from '../data/Timer';
+import { ITimer } from '../data/ITimer';
 import './Listview.css';
+import { Timer } from '../timer/Timer';
 
 export const Listview: FunctionComponent = () => {
     const [timers, setTimers] = useContext(TimerContext);
 
     const updateStatus = (timer: ITimer) => {
         timers.map(t => {
-            if (t === timer)
+            if (t.id === timer.id)
                 t.isActive = !timer.isActive;
 
             return t;
@@ -18,12 +19,20 @@ export const Listview: FunctionComponent = () => {
     };
 
     const deleteTimer = (timer: ITimer) => {
-        setTimers(timers.filter(t => t !== timer));
+        setTimers(timers.filter(t => t.id !== timer.id));
+    };
+
+    const clearTimers = () => {
+        setTimers([]);
     };
 
     return (
         <div>
             <br />
+            <button className="float-right btn btn-info"
+                    onClick={ () => clearTimers() }>
+                Clear
+            </button>
             <table className="table">
                 <thead>
                     <tr>
@@ -35,24 +44,10 @@ export const Listview: FunctionComponent = () => {
                 </thead>
                 <tbody>
                     {
-                        // This iterates through every ITimer object and prints it out
+                        // This iterates through every ITimer object and prints out a row
+                        // TODO: separate into Timer components to avoid capturing closures
                         timers.map(timer => (
-                            <tr>
-                                <td>{ timer.title }</td>
-                                <td>{ timer.description }</td>
-                                <td>{ timer.interval }</td>
-                                <td>
-                                    <button className={ timer.isActive ? 'btn btn-danger' : 'btn btn-success' }
-                                            onClick={ () => updateStatus(timer) }>
-                                        { timer.isActive ? 'Stop' : 'Start' }
-                                    </button>
-                                    &nbsp;
-                                    <button className="btn btn-primary"
-                                            onClick={ () => deleteTimer(timer) }>
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
+                            <Timer timer={ timer } updateStatus={ updateStatus } deleteTimer={ deleteTimer }/>
                         ))
                     }
                 </tbody>
